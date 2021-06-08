@@ -141,3 +141,8 @@ const TestComponent = () => {
 ## License
 
 MIT © [Albert Gao](https://github.com/Albert-Gao)
+
+## Credits
+
+It all starts from my [feature request](https://github.com/pmndrs/zustand/issues/400)
+Thanks [dai-shi](https://github.com/dai-shi) for the initial implementation and ideas of API.

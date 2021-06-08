@@ -15,8 +15,8 @@ jobs:
         with:
           node-version: '14.x'
 
-      - run: npm ci --silent
-      - run: npm run coverage
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
