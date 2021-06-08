@@ -16,7 +16,6 @@
   },
   "homepage": "",
   "license": "MIT",
-  "private": true,
   "scripts": {
     "start": "rollup -c rollup.config.js -w",
     "lint": "eslint ./src/index.ts",
