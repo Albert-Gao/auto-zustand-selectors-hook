@@ -26,8 +26,7 @@
     "test:ci": "cross-env CI=1 jest"
   },
   "engines": {
-    "node": ">=14",
-    "npm": ">=6"
+    "node": ">=10.0.0"
   },
   "peerDependencies": {
     "zustand": ">=3"
