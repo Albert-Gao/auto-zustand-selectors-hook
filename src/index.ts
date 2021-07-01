@@ -40,13 +40,3 @@ export function createSelectorHooks<StoreType extends State>(
 
   return store as UseStore<StoreType> & Hook<StoreType>;
 }
-
-// interface BearState {
-//   bears: number;
-//   increase: (by: number) => void;
-// }
-
-// const useStore = create<BearState>(set => ({
-//   bears: 0,
-//   increase: by => set(state => ({ bears: state.bears + by })),
-// }));

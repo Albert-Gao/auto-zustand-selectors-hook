@@ -36,6 +36,8 @@
     <img src="https://badgen.net/twitter/follow/albertgao"/>
   </a>
 
+**Stop writing selectors and do more work!**
+
 ## Features
 
 - auto generate selectors for Zustand store
