@@ -36,7 +36,7 @@
     <img src="https://badgen.net/twitter/follow/albertgao"/>
   </a>
 
-**Stop writing selectors and do more work!**
+**Enjoy the performance gain of selectors without writing selectors!**
 
 ## Features
 
@@ -58,10 +58,12 @@ yarn add auto-zustand-selectors-hook
 
 ## Notice
 
-The v2 supports Zustand v4, if you are using a Zustand v3, please install the v1 version
+The `v2` supports `Zustand v4`, if you are using a `Zustand v3`, please install the `v1` version
 
 ```bash
 yarn add auto-zustand-selectors-hook@1.0.1
+
+npm install --save auto-zustand-selectors-hook@1.0.1
 ```
 
 ## Usage
@@ -142,6 +144,25 @@ const TestComponent = () => {
     </>
   );
 };
+```
+
+## 3. use with middlewares
+
+> You use the middleware for creating the base store, and `ALWAYS` use `auto-zustand-selectors-hooks` as a separate wrapper
+
+```typescript
+import { createSelectorHooks } from '../src/index';
+import create from 'zustand';
+import { persist } from 'zustand/middleware';
+
+const useStoreBase = create<BearState>()(
+  persist((set) => ({
+    bears: 0,
+    increase: (by) => set((state) => ({ bears: state.bears + by })),
+  }))
+);
+
+export const useStore = createSelectorHooks(useStoreBase);
 ```
 
 ## License
