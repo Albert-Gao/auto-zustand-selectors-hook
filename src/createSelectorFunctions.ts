@@ -1,23 +1,23 @@
 import { StoreApi, UseBoundStore } from 'zustand';
 
-interface ZustandFuncSelectors<StoreType> {
+interface ZustandFuncSelectors<StateType> {
   use: {
-    [key in keyof StoreType]: () => StoreType[key];
+    [key in keyof StateType]: () => StateType[key];
   };
 }
 
-export function createSelectorFunctions<StoreType extends object>(
-  store: UseBoundStore<StoreApi<StoreType>>
+export function createSelectorFunctions<StateType extends object>(
+  store: UseBoundStore<StoreApi<StateType>>
 ) {
   const storeIn = store as any;
 
   storeIn.use = {};
 
   Object.keys(storeIn.getState()).forEach((key) => {
-    const selector = (state: StoreType) => state[key as keyof StoreType];
+    const selector = (state: StateType) => state[key as keyof StateType];
     storeIn.use[key] = () => store(selector);
   });
 
-  return store as UseBoundStore<StoreApi<StoreType>> &
-    ZustandFuncSelectors<StoreType>;
+  return store as UseBoundStore<StoreApi<StateType>> &
+    ZustandFuncSelectors<StateType>;
 }

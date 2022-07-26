@@ -1,23 +1,23 @@
 import { StoreApi, UseBoundStore } from 'zustand';
 
-type ZustandHookSelectors<BaseType> = {
-  [Key in keyof BaseType as `use${Capitalize<
+type ZustandHookSelectors<StateType> = {
+  [Key in keyof StateType as `use${Capitalize<
     string & Key
-  >}`]: () => BaseType[Key];
+  >}`]: () => StateType[Key];
 };
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export function createSelectorHooks<StoreType extends object>(
-  store: UseBoundStore<StoreApi<StoreType>>
+export function createSelectorHooks<StateType extends object>(
+  store: UseBoundStore<StoreApi<StateType>>
 ) {
   const storeIn = store as any;
 
   Object.keys(storeIn.getState()).forEach((key) => {
-    const selector = (state: StoreType) => state[key as keyof StoreType];
+    const selector = (state: StateType) => state[key as keyof StateType];
     storeIn[`use${capitalize(key)}`] = () => storeIn(selector);
   });
 
-  return storeIn as UseBoundStore<StoreApi<StoreType>> &
-    ZustandHookSelectors<StoreType>;
+  return storeIn as UseBoundStore<StoreApi<StateType>> &
+    ZustandHookSelectors<StateType>;
 }
