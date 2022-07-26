@@ -36,13 +36,13 @@
     <img src="https://badgen.net/twitter/follow/albertgao"/>
   </a>
 
-**Stop writing selectors and do more work!**
+**Enjoy the performance gain of selectors without writing selectors!**
 
 ## Features
 
-- auto generate selectors for Zustand store
-- 2 styles available
-- Typescript auto completion supported
+- auto generate selectors for Zustand store (be it a value or a function)
+- Two styles available
+- Fully Typescript support (auto-completion for the generated selectors!)
 
 ## Install
 
@@ -54,6 +54,16 @@ Or with yarn:
 
 ```bash
 yarn add auto-zustand-selectors-hook
+```
+
+## Notice
+
+The `v2` supports `Zustand v4`, if you are using a `Zustand v3`, please install the `v1` version
+
+```bash
+yarn add auto-zustand-selectors-hook@1.0.1
+
+npm install --save auto-zustand-selectors-hook@1.0.1
 ```
 
 ## Usage
@@ -72,9 +82,9 @@ const useStoreBase = create<BearState>((set) => ({
 }));
 ```
 
-**There are two types of selectors you can generate, purely function signature difference, underneath, they are all selectors.**
+> **There are two types of selectors you can generate, purely function signature difference, underneath, they are all selectors.**
 
-### For function style ( createSelectorFunctions )
+## 1. For function style ( createSelectorFunctions )
 
 ```typescript
 import { createSelectorFunctions } from 'auto-zustand-selectors-hook';
@@ -84,7 +94,7 @@ import { create } from 'zustand';
 const useStore = createSelectorFunctions(useStoreBase);
 
 // use it like this!
-// .use.blahblah is a pre-generated selector, yeah!
+// useStore.use.blah is a pre-generated selector, yeah!
 const TestComponent = () => {
   const bears = useStore.use.bears();
   const increase = useStore.use.increase();
@@ -92,6 +102,7 @@ const TestComponent = () => {
   return (
     <>
       <span>{bears}</span>
+
       <button
         onClick={() => {
           increase(1);
@@ -104,23 +115,17 @@ const TestComponent = () => {
 };
 ```
 
-### For hook style ( createSelectorHooks )
+## 2. For hook style ( createSelectorHooks )
 
 ```typescript
 import { createSelectorHooks } from 'auto-zustand-selectors-hook';
 import { create } from 'zustand';
 
-// create your store
-const useStoreBase = create<BearState>((set) => ({
-  bears: 0,
-  increase: (by) => set((state) => ({ bears: state.bears + by })),
-}));
-
 // wrap your store
 const useStore = createSelectorHooks(useStoreBase);
 
 // use it like this!
-// .useBlahblah is a pre-generated selector, yeah!
+// useStore.useBlah is a pre-generated selector, yeah!
 const TestComponent = () => {
   const bears = useStore.useBears();
   const increase = useStore.useIncrease();
@@ -128,6 +133,7 @@ const TestComponent = () => {
   return (
     <>
       <span>{bears}</span>
+
       <button
         onClick={() => {
           increase(1);
@@ -138,6 +144,25 @@ const TestComponent = () => {
     </>
   );
 };
+```
+
+## 3. use with middlewares
+
+> You use the middleware for creating the base store, and `ALWAYS` use `auto-zustand-selectors-hooks` as a separate wrapper
+
+```typescript
+import { createSelectorHooks } from '../src/index';
+import create from 'zustand';
+import { persist } from 'zustand/middleware';
+
+const useStoreBase = create<BearState>()(
+  persist((set) => ({
+    bears: 0,
+    increase: (by) => set((state) => ({ bears: state.bears + by })),
+  }))
+);
+
+export const useStore = createSelectorHooks(useStoreBase);
 ```
 
 ## License
