@@ -1,6 +1,6 @@
 import { StoreApi, UseBoundStore } from 'zustand';
 
-type ZustandHookSelectors<StateType> = {
+export type ZustandHookSelectors<StateType> = {
   [Key in keyof StateType as `use${Capitalize<
     string & Key
   >}`]: () => StateType[Key];
