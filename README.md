@@ -170,14 +170,14 @@ const useStoreBase = create<BearState>()(
 export const useStore = createSelectorHooks(useStoreBase);
 
 // ✅ DO this if use createSelectorFunctions()
-export const useCurrentUser = createSelectorFunctions(
-  useCurrentUserBase
-) as typeof useCurrentUserBase & ZustandFuncSelectors<BearState>;
+export const useStore = createSelectorFunctions(
+  useStoreBase
+) as typeof useStoreBase & ZustandFuncSelectors<BearState>;
 
 // ✅ DO this if use createSelectorHooks()
-export const useCurrentUser = createSelectorHooks(
-  useCurrentUserBase
-) as typeof useCurrentUserBase & ZustandHookSelectors<BearState>;
+export const useStore = createSelectorHooks(
+  useStoreBase
+) as typeof useStoreBase & ZustandHookSelectors<BearState>;
 ```
 
 ## License
