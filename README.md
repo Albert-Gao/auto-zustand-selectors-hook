@@ -151,7 +151,11 @@ const TestComponent = () => {
 > You use the middleware for creating the base store, and `ALWAYS` use `auto-zustand-selectors-hooks` as a separate wrapper
 
 ```typescript
-import { createSelectorHooks } from '../src/index';
+import {
+  createSelectorHooks,
+  ZustandFuncSelectors,
+  ZustandHookSelectors,
+} from 'auto-zustand-selectors-hook';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -162,7 +166,18 @@ const useStoreBase = create<BearState>()(
   }))
 );
 
+// ❌ this will lost  the persist middleware type like useStore.persist
 export const useStore = createSelectorHooks(useStoreBase);
+
+// ✅ DO this if use createSelectorFunctions()
+export const useCurrentUser = createSelectorFunctions(
+  useCurrentUserBase
+) as typeof useCurrentUserBase & ZustandFuncSelectors<BearState>;
+
+// ✅ DO this if use createSelectorHooks()
+export const useCurrentUser = createSelectorHooks(
+  useCurrentUserBase
+) as typeof useCurrentUserBase & ZustandHookSelectors<BearState>;
 ```
 
 ## License
