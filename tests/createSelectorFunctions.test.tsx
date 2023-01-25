@@ -1,5 +1,5 @@
 import * as React from 'react';
-import create from 'zustand';
+import { create } from 'zustand';
 import { createSelectorFunctions } from '../src/index';
 import { render, fireEvent } from '@testing-library/react';
 

@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { createSelectorFunctions, createSelectorHooks } from '../src/index';
 import { persist } from 'zustand/middleware';
 
@@ -10,10 +10,15 @@ interface BearState {
 describe('Test middlewares', () => {
   it('should have correct types when using middlewares - createSelectorHooks', () => {
     const useStoreBase = create<BearState>()(
-      persist((set) => ({
-        bears: 0,
-        increase: (by) => set((state) => ({ bears: state.bears + by })),
-      }))
+      persist(
+        (set) => ({
+          bears: 0,
+          increase: (by) => set((state) => ({ bears: state.bears + by })),
+        }),
+        {
+          name: 'mock-storage-1',
+        }
+      )
     );
 
     const useStore = createSelectorHooks(useStoreBase);
@@ -27,10 +32,15 @@ describe('Test middlewares', () => {
 
   it('should have correct types when using middlewares - createSelectorFunctions', () => {
     const useStoreBase = create<BearState>()(
-      persist((set) => ({
-        bears: 0,
-        increase: (by) => set((state) => ({ bears: state.bears + by })),
-      }))
+      persist(
+        (set) => ({
+          bears: 0,
+          increase: (by) => set((state) => ({ bears: state.bears + by })),
+        }),
+        {
+          name: 'mock-storage-2',
+        }
+      )
     );
 
     const useStore = createSelectorFunctions(useStoreBase);
