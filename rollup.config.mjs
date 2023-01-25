@@ -4,9 +4,10 @@ import external from 'rollup-plugin-peer-deps-external';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
-import pkg from './package.json';
+import pkg from './package.json' assert { type: 'json' };
 
-export default {
+/** @type {import('rollup').RollupOptions} */
+const option = {
   input: `src/index.ts`,
   output: [
     {
@@ -38,7 +39,6 @@ export default {
     // Compile TypeScript files
     typescript({
       useTsconfigDeclarationDir: true,
-      rollupCommonJSResolveHack: true,
       exclude: ['**/__tests__/**', '*.spec.*', '*.test.*'],
       clean: true,
     }),
@@ -52,3 +52,5 @@ export default {
     sourceMaps(),
   ],
 };
+
+export default option;
