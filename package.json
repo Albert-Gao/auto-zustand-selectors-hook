@@ -11,7 +11,7 @@
   ],
   "author": "Albert Gao <albertgaohy@gmail.com>",
   "repository": {
-    "url": "git+https://github.com/Albert-Gao/auto-zustand-selectors-hook",
+    "url": "git+https://github.com/Albert-Gao/auto-zustand-selectors-hook.git",
     "type": "git"
   },
   "bugs": {
