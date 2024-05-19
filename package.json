@@ -1,6 +1,6 @@
 {
   "name": "auto-zustand-selectors-hook",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "keywords": [],
   "description": "",
   "main": "dist/index.min.js",
@@ -29,7 +29,7 @@
     "test:ci": "cross-env CI=1 jest"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   },
   "peerDependencies": {
     "zustand": ">=4"
