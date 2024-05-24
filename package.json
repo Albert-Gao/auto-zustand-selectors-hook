@@ -32,7 +32,7 @@
     "node": ">=18.0.0"
   },
   "peerDependencies": {
-    "zustand": ">=4"
+    "zustand": "*"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
