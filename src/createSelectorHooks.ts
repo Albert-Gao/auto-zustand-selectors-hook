@@ -15,11 +15,9 @@ export function createSelectorHooks<StateType extends object>(
 
   Object.keys(storeIn.getState()).forEach((key) => {
     const selector = (state: StateType) => state[key as keyof StateType];
-    storeIn[`use${capitalize(key)}`] = () => {
-      return typeof storeIn === 'function'
-        ? storeIn(selector)
-        : useStore(storeIn, selector as any);
-    };
+    storeIn[`use${capitalize(key)}`] = typeof storeIn === 'function'
+      ? () => storeIn(selector)
+      : () => useStore(storeIn, selector as any);
   });
 
   return storeIn as UseBoundStore<StoreApi<StateType>> &
