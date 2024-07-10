@@ -1,6 +1,6 @@
 {
   "name": "auto-zustand-selectors-hook",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "keywords": [],
   "description": "",
   "main": "dist/index.min.js",
