@@ -2,9 +2,9 @@ import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import external from 'rollup-plugin-peer-deps-external';
 import sourceMaps from 'rollup-plugin-sourcemaps';
-import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json' assert { type: 'json' };
+import terser from '@rollup/plugin-terser';
 
 /** @type {import('rollup').RollupOptions} */
 const option = {
@@ -50,6 +50,7 @@ const option = {
     commonjs(),
     // Resolve source maps to the original source
     sourceMaps(),
+    terser(),
   ],
 };
 

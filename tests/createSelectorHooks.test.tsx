@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { create } from 'zustand';
 import { createSelectorHooks } from '../src/index';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 
 interface BearState {
   bears: number;
@@ -51,16 +52,16 @@ describe('Test createSelectorHooks', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    render(<TestComponent />);
 
-    expect(getByTestId('text').textContent).toBe('0');
+    expect(screen.getByTestId('text').textContent).toBe('0');
 
-    fireEvent.click(getByTestId('button'));
+    fireEvent.click(screen.getByTestId('button'));
 
-    expect(getByTestId('text').textContent).toBe('1');
+    expect(screen.getByTestId('text').textContent).toBe('1');
 
-    fireEvent.click(getByTestId('button'));
+    fireEvent.click(screen.getByTestId('button'));
 
-    expect(getByTestId('text').textContent).toBe('2');
+    expect(screen.getByTestId('text').textContent).toBe('2');
   });
 });

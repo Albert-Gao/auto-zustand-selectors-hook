@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStore } from 'zustand';
 import { createSelectorFunctions, createSelectorHooks } from '../src/index';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import { combine } from 'zustand/middleware';
 
 interface BearState {
@@ -108,17 +108,17 @@ describe('the Context + createSelectorFunctions() usage should work', () => {
       );
     };
 
-    const { getByTestId } = render(<App />);
+    render(<App />);
 
-    expect(getByTestId('text').textContent).toBe('0');
+    expect(screen.getByTestId('text').textContent).toBe('0');
 
-    fireEvent.click(getByTestId('button'));
+    fireEvent.click(screen.getByTestId('button'));
 
-    expect(getByTestId('text').textContent).toBe('1');
+    expect(screen.getByTestId('text').textContent).toBe('1');
 
-    fireEvent.click(getByTestId('button'));
+    fireEvent.click(screen.getByTestId('button'));
 
-    expect(getByTestId('text').textContent).toBe('2');
+    expect(screen.getByTestId('text').textContent).toBe('2');
   });
 });
 
@@ -161,17 +161,17 @@ describe('the Context + createSelectorHooks() usage should work', () => {
       </StoreContext.Provider>
     );
 
-    const { getByTestId } = render(<App />);
+    render(<App />);
 
-    expect(getByTestId('text').textContent).toBe('0');
+    expect(screen.getByTestId('text').textContent).toBe('0');
 
-    fireEvent.click(getByTestId('button'));
+    fireEvent.click(screen.getByTestId('button'));
 
-    expect(getByTestId('text').textContent).toBe('1');
+    expect(screen.getByTestId('text').textContent).toBe('1');
 
-    fireEvent.click(getByTestId('button'));
+    fireEvent.click(screen.getByTestId('button'));
 
-    expect(getByTestId('text').textContent).toBe('2');
+    expect(screen.getByTestId('text').textContent).toBe('2');
   });
 
   it('should work when using combine() + createSelectorHooks()', () => {
@@ -214,16 +214,16 @@ describe('the Context + createSelectorHooks() usage should work', () => {
       </StoreContext.Provider>
     );
 
-    const { getByTestId } = render(<App />);
+    render(<App />);
 
-    expect(getByTestId('text').textContent).toBe('0');
+    expect(screen.getByTestId('text').textContent).toBe('0');
 
-    fireEvent.click(getByTestId('button'));
+    fireEvent.click(screen.getByTestId('button'));
 
-    expect(getByTestId('text').textContent).toBe('1');
+    expect(screen.getByTestId('text').textContent).toBe('1');
 
-    fireEvent.click(getByTestId('button'));
+    fireEvent.click(screen.getByTestId('button'));
 
-    expect(getByTestId('text').textContent).toBe('2');
+    expect(screen.getByTestId('text').textContent).toBe('2');
   });
 });
