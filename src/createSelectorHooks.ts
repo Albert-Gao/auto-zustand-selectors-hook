@@ -2,7 +2,7 @@ import { type StoreApi, type UseBoundStore, useStore } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 
 export type ZustandHookSelectors<StateType> = {
-  [Key in keyof StateType as `use${Capitalize<
+  [Key in NonNullable<keyof StateType> as `use${Capitalize<
     string & Key
   >}`]: () => StateType[Key];
 };

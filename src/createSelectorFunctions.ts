@@ -3,7 +3,7 @@ import { useShallow } from 'zustand/react/shallow';
 
 export interface ZustandFuncSelectors<StateType> {
   use: {
-    [key in keyof StateType]: () => StateType[key];
+    [key in NonNullable<keyof StateType>]: () => StateType[key];
   };
 }
 
